@@ -8,13 +8,15 @@ import {
 import Navbar from "./Components/Navbar";
 import Signin from "./pages/Auth/Signin";
 import Signup from "./pages/Auth/Signup";
+import Products from "./pages/Auth/Products";
+
 function App() {
   return (
     <Router>
       <div>
         <Navbar />
         <Switch>
-          <Route path="/" Component={Home} />
+          <Route path="/" Component={Products} />
           <Route path="/signin" Component={Signin} />
           <Route path="/signup" Component={Signup} />
         </Switch>
@@ -23,7 +25,4 @@ function App() {
   );
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
 export default App;
