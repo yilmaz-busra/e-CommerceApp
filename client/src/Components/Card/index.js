@@ -1,18 +1,20 @@
 import { Box, Image, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-function Card() {
+import moment from "moment";
+function Card({ item }) {
   return (
     <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p="3">
       <Link>
-        <Image src="https://picsum.photos/200/300" alt="Product" />
+        <Image src={item.photos[0]} alt="Product" loading="lazy" />
         <Box p="6">
           <Box d="plex" alignItems="baseline">
-            12/12/2023
+            {/* calismadi */}
+            {moment(item.createdAt).format("DD/MM/YYYY")}
           </Box>
           <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight">
-            Macbook Pro
+            {item.title}
           </Box>
-          <Box>100</Box>
+          <Box>{item.price}</Box>
         </Box>
       </Link>
       <Button colorScheme="pink">Addto Basket</Button>
