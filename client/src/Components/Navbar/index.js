@@ -21,7 +21,7 @@ function Navbar() {
           <Link to={"/singin"}>
             <Button colorScheme="pink">LOGIN</Button>
           </Link>
-          <Link to={"/singup"}>
+          <Link to={"/signup"}>
             <Button colorScheme="pink">Register</Button>
           </Link>
         </div>
