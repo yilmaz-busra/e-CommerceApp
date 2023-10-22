@@ -8,6 +8,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import reportWebVitals from "./reportWebVitals";
 
+//contexts import ettik
+import { AuthProvider } from "./contextts/AuthContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,7 +25,9 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ChakraProvider>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </ChakraProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
