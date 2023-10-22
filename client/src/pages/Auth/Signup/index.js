@@ -13,8 +13,10 @@ import {
 import validationSchema from "./validations";
 import { fetchRegister } from "../../../api";
 import { Await } from "react-router-dom";
+import { useAuth } from "../../../contextts/AuthContext";
 
 function Signup() {
+  const { login } = useAuth();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,6 +30,8 @@ function Signup() {
           email: values.email,
           password: values.password,
         });
+        // authContext içerisinde yazılmış olan login fonksiyonu ile beraber veritabanına gönderilen verilerle login işlemini gerçekleştiriyoruz
+        login(registerResponse);
         console.log(registerResponse);
       } catch (e) {
         bag.setErrors({ general: e.response.data.message }); // hata mesajını alıyoruz
