@@ -8,8 +8,12 @@ import {
   FormLabel,
   Button,
   Input,
+  Alert,
 } from "@chakra-ui/react";
 import validationSchema from "./validations";
+import { fetchRegister } from "../../../api";
+import { Await } from "react-router-dom";
+
 function Signup() {
   const formik = useFormik({
     initialValues: {
@@ -17,8 +21,17 @@ function Signup() {
       password: "",
       passwordConfirm: "",
     },
-    onSubmit: (values, bag) => {
-      console.log(values);
+    onSubmit: async (values, bag) => {
+      try {
+        // kayıt işlemi için formdan gelen verileri veritabanına gönderiyoruz.
+        const registerResponse = await fetchRegister({
+          email: values.email,
+          password: values.password,
+        });
+        console.log(registerResponse);
+      } catch (e) {
+        bag.setErrors({ general: e.response.data.message }); // hata mesajını alıyoruz
+      }
     },
     validationSchema: validationSchema,
   });
@@ -29,7 +42,11 @@ function Signup() {
           <Box textAlign="center">
             <Heading>Sing Up</Heading>
           </Box>
-
+          <Box my={5}>
+            {formik.errors.general && (
+              <Alert status="error">{formik.errors.general}</Alert>
+            )}
+          </Box>
           <Box my={5} textAlign="center">
             <form onSubmit={formik.handleSubmit}>
               <FormControl>
@@ -41,6 +58,8 @@ function Signup() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.email}
+                  // email ile alakalı bir sorun varsa goster
+                  isInvalid={formik.touched.email && formik.errors.email}
                 />
               </FormControl>
               <FormControl>
@@ -52,6 +71,8 @@ function Signup() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.password}
+                  // password ile alakalı bir sorun varsa goster
+                  isInvalid={formik.touched.password && formik.errors.password}
                 />
               </FormControl>
               <FormControl>
@@ -63,6 +84,11 @@ function Signup() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.passwordConfirm}
+                  // passwordConfirm ile alakalı bir sorun varsa goster
+                  isInvalid={
+                    formik.touched.passwordConfirm &&
+                    formik.errors.passwordConfirm
+                  }
                 />
               </FormControl>
               <Button mt={5} type="submit">
