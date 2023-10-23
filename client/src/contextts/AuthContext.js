@@ -9,6 +9,8 @@ const AuthProvider = ({ children }) => {
   const login = (data) => {
     setLoggedIn(true);
     setUser(data);
+
+    localStorage.setItem("access-token", data.ac);
   };
   // context içerisinden componentlere gönderilen veriler
   const values = {
