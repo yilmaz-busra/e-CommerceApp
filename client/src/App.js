@@ -11,6 +11,7 @@ import Signup from "./pages/Auth/Signup";
 import Products from "./pages/Auth/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Profile from "./pages/Profile";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
             <Route path="/signin" Component={Signin} />
             <Route path="/signup" Component={Signup} />
             <Route path="/profile" Component={Profile} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/profile" element={<Profile />} />
+            </Route>
           </Switch>
         </div>
       </div>
