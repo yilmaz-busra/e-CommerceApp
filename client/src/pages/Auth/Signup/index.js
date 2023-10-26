@@ -15,7 +15,7 @@ import { fetchRegister } from "../../../api";
 import { Await } from "react-router-dom";
 import { useAuth } from "../../../contextts/AuthContext";
 
-function Signup() {
+function Signup({ history }) {
   const { login } = useAuth();
   const formik = useFormik({
     initialValues: {
