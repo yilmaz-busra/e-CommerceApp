@@ -24,7 +24,7 @@ function Navbar() {
         <div className={styles.right}>
           {!loggedIn && (
             <>
-              <Link to={"/singin"}>
+              <Link to={"/signin"}>
                 <Button colorScheme="pink">LOGIN</Button>
               </Link>
               <Link to={"/signup"}>

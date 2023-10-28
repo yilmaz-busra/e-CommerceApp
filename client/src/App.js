@@ -12,7 +12,6 @@ import Products from "./pages/Auth/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./pages/ProtectedRoute";
-
 function App() {
   return (
     <Router>
