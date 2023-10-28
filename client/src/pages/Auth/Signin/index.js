@@ -11,7 +11,7 @@ import {
   Alert,
 } from "@chakra-ui/react";
 import validationSchema from "./validations";
-import { fetchRegister } from "../../../api";
+import { fetchLogin } from "../../../api";
 import { Await } from "react-router-dom";
 import { useAuth } from "../../../contextts/AuthContext";
 
@@ -26,13 +26,13 @@ function Signin({ history }) {
     onSubmit: async (values, bag) => {
       try {
         // kayıt işlemi için formdan gelen verileri veritabanına gönderiyoruz.
-        const registerResponse = await fetchRegister({
+        const loginResponse = await fetchLogin({
           email: values.email,
           password: values.password,
         });
         // authContext içerisinde yazılmış olan login fonksiyonu ile beraber veritabanına gönderilen verilerle login işlemini gerçekleştiriyoruz
-        login(registerResponse);
-        console.log(registerResponse);
+        login(loginResponse);
+        console.log(loginResponse);
       } catch (e) {
         bag.setErrors({ general: e.response.data.message }); // hata mesajını alıyoruz
       }
@@ -44,7 +44,7 @@ function Signin({ history }) {
       <Flex align="center" width="full" justifyContent="center">
         <Box pt={10}>
           <Box textAlign="center">
-            <Heading>Sing Up</Heading>
+            <Heading>Sing In</Heading>
           </Box>
           <Box my={5}>
             {formik.errors.general && (
@@ -79,24 +79,9 @@ function Signin({ history }) {
                   isInvalid={formik.touched.password && formik.errors.password}
                 />
               </FormControl>
-              <FormControl>
-                <FormLabel>Password Confirm</FormLabel>
-                <Input
-                  name="passwordConfirm"
-                  type="password"
-                  id="passwordConfirm"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.passwordConfirm}
-                  // passwordConfirm ile alakalı bir sorun varsa goster
-                  isInvalid={
-                    formik.touched.passwordConfirm &&
-                    formik.errors.passwordConfirm
-                  }
-                />
-              </FormControl>
+
               <Button mt={5} type="submit">
-                Signup
+                Sign In
               </Button>
             </form>
           </Box>
