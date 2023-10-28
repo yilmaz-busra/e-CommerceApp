@@ -10,6 +10,9 @@ import reportWebVitals from "./reportWebVitals";
 
 //contexts import ettik
 import { AuthProvider } from "./contextts/AuthContext";
+
+import { BasketProvider } from "./contextts/BasketContext";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,7 +29,9 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <ChakraProvider>
         <AuthProvider>
-          <App />
+          <BasketProvider>
+            <App />
+          </BasketProvider>
         </AuthProvider>
       </ChakraProvider>
       <ReactQueryDevtools initialIsOpen={false} />
